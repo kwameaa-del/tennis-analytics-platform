@@ -61,7 +61,7 @@ def download_tour_data(
                     failed.append(year)
                 else:
                     time.sleep(retry_base_seconds * attempt)
-            except Exception as exc:  # library/network exceptions vary by engine
+            except Exception:  # library/network exceptions vary by engine
                 LOGGER.exception("Unexpected download failure for %s %s", tour.upper(), year)
                 if attempt == retries:
                     failed.append(year)

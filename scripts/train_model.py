@@ -21,7 +21,12 @@ def main() -> None:
         root / "models" / f"{args.tour}_model.joblib",
         c=settings.logistic_regression_c,
     )
-    LOGGER.info("Trained %s model on %s rows through %s", args.tour.upper(), artifact.trained_rows, artifact.max_training_date)
+    LOGGER.info(
+    "Trained %s model on %s rows through %s",
+    args.tour.upper(),
+    artifact.trained_rows,
+    artifact.max_training_date,
+)
 
 
 if __name__ == "__main__":

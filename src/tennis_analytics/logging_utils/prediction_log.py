@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import csv
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 FIELDNAMES = [
@@ -14,10 +14,10 @@ FIELDNAMES = [
 def append_prediction(path: Path, row: dict[str, object]) -> str:
     """Append an immutable pre-match forecast record and return its ID."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    prediction_id = str(row.get("prediction_id") or f"pred-{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S%f')}")
+    prediction_id = str(row.get("prediction_id") or f"pred-{datetime.now(UTC).strftime('%Y%m%d%H%M%S%f')}")
     output = {
         "prediction_id": prediction_id,
-        "timestamp_utc": row.get("timestamp_utc") or datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "timestamp_utc": row.get("timestamp_utc") or datetime.now(UTC).isoformat(timespec="seconds"),
         "tour": row["tour"], "player_1": row["player_1"], "player_2": row["player_2"],
         "surface": row["surface"], "best_of": row["best_of"],
         "model_p1_prob": f"{float(row['model_p1_prob']):.6f}",

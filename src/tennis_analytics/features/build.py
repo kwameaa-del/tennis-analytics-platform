@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from collections import defaultdict, deque
 import logging
+from collections import defaultdict, deque
 from pathlib import Path
 
 import numpy as np
