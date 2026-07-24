@@ -1,0 +1,19 @@
+[Unit]
+Description=Tennis Analytics Daily Pipeline
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=tennisanalytics
+Group=tennisanalytics
+WorkingDirectory=/opt/tennis-analytics-platform
+Environment="PYTHONPATH=/opt/tennis-analytics-platform/src"
+ExecStart=/opt/tennis-analytics-platform/.venv/bin/python scripts/run_daily_pipeline.py
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/opt/tennis-analytics-platform/data /opt/tennis-analytics-platform/reports /opt/tennis-analytics-platform/logs /opt/tennis-analytics-platform/models
+
+[Install]
+WantedBy=multi-user.target

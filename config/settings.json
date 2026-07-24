@@ -1,0 +1,11 @@
+{
+  "years": [2021, 2022, 2023, 2024, 2025, 2026],
+  "base_elo": 1500,
+  "standard_k": 32,
+  "provisional_k": 48,
+  "provisional_match_limit": 30,
+  "recent_form_window": 10,
+  "random_seed": 42,
+  "logistic_regression_c": 0.1,
+  "log_level": "INFO"
+}

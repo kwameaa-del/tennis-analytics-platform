@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - name: Install package and developer tools
+        run: python -m pip install --upgrade pip && pip install -e ".[dev]"
+      - name: Lint
+        run: ruff check .
+      - name: Run tests with coverage
+        run: pytest --cov=tennis_analytics --cov-report=term-missing --cov-fail-under=70
