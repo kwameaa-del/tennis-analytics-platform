@@ -1,7 +1,7 @@
 # Tennis Analytics Platform
 
-[![CI](https://github.com/USERNAME/tennis-analytics-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/USERNAME/tennis-analytics-platform/actions/workflows/ci.yml)
-[![Docker Build](https://github.com/USERNAME/tennis-analytics-platform/actions/workflows/docker.yml/badge.svg)](https://github.com/USERNAME/tennis-analytics-platform/actions/workflows/docker.yml)
+[![CI](https://github.com/kwameaa-del/tennis-analytics-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/kwameaa-del/tennis-analytics-platform/actions/workflows/ci.yml)
+[![Docker Build](https://github.com/kwameaa-del/tennis-analytics-platform/actions/workflows/docker.yml/badge.svg)](https://github.com/kwameaa-del/tennis-analytics-platform/actions/workflows/docker.yml)
 
 A production-oriented Python analytics platform for engineering, evaluating, and deploying probabilistic ATP and WTA tennis forecasting models using reproducible machine learning workflows.
 
