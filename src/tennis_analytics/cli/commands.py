@@ -6,6 +6,7 @@ from pathlib import Path
 import pandas as pd
 
 from tennis_analytics.config import Settings, load_settings, project_root
+from tennis_analytics.data.demo import generate_demo_data
 from tennis_analytics.data.download import download_tour_data, validate_tour
 from tennis_analytics.evaluation.walk_forward import evaluate_walk_forward
 from tennis_analytics.features.build import build_features
@@ -26,9 +27,7 @@ def _paths(root: Path, tour: str) -> dict[str, Path]:
         "evaluation_report": (
             root / "reports" / f"{tour}_walk_forward.csv"
         ),
-        "model_file": (
-            root / "models" / f"{tour}_model.joblib"
-        ),
+        "model_file": root / "models" / f"{tour}_model.joblib",
     }
 
 
@@ -191,6 +190,37 @@ def run_pipeline(
 
     LOGGER.info(
         "Completed full %s pipeline",
+        normalized_tour.upper(),
+    )
+
+    return outputs
+
+
+def run_demo(tour: str) -> dict[str, Path]:
+    """Generate fictional data and run the full pipeline offline."""
+
+    normalized_tour, _, settings, paths = _context(tour)
+
+    LOGGER.info(
+        "Starting offline %s demo pipeline",
+        normalized_tour.upper(),
+    )
+
+    raw_path = generate_demo_data(
+        normalized_tour,
+        paths["raw_file"],
+        random_seed=settings.random_seed,
+    )
+
+    outputs = {
+        "raw_data": raw_path,
+        "features": run_build(normalized_tour),
+        "evaluation": run_evaluate(normalized_tour),
+        "model": run_train(normalized_tour),
+    }
+
+    LOGGER.info(
+        "Completed offline %s demo pipeline",
         normalized_tour.upper(),
     )
 

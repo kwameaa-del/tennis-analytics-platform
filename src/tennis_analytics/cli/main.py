@@ -6,6 +6,7 @@ from collections.abc import Sequence
 
 from tennis_analytics.cli.commands import (
     run_build,
+    run_demo,
     run_download,
     run_evaluate,
     run_pipeline,
@@ -38,6 +39,7 @@ def _build_parser() -> argparse.ArgumentParser:
         ("build", "Build pre-match model features"),
         ("evaluate", "Run walk-forward evaluation"),
         ("train", "Train and persist the final model"),
+        ("demo", "Run the full pipeline with offline fictional data"),
     ):
         command_parser = subparsers.add_parser(
             command,
@@ -111,6 +113,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
 
             print("Pipeline completed successfully.")
+
+            for name, path in outputs.items():
+                print(f"{name}: {path}")
+
+        elif args.command == "demo":
+            outputs = run_demo(args.tour)
+
+            print("Offline demo completed successfully.")
 
             for name, path in outputs.items():
                 print(f"{name}: {path}")
