@@ -49,6 +49,9 @@ dependencies = [
     "matplotlib>=3.9,<4",
 ]
 
+[project.scripts]
+tennis = "tennis_analytics.cli.main:main"
+
 [project.optional-dependencies]
 dev = [
     "pytest>=8.2,<9",
